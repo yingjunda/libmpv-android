@@ -37,9 +37,9 @@ jni_func(void, nativeAttachSurface, jlong instance, jobject surface) {
 jni_func(void, nativeDetachSurface, jlong instance) {
     auto mpv_instance = reinterpret_cast<MPVInstance*>(instance);
     int64_t wid = 0;
-    int result = mpv_set_option(mpv_instance->mpv, "wid", MPV_FORMAT_INT64, &wid);
+    int result = mpv_set_property(mpv_instance->mpv, "wid", MPV_FORMAT_INT64, &wid);
     if (result < 0)
-        ALOGE("mpv_set_option(wid) returned error %s", mpv_error_string(result));
+        ALOGE("mpv_set_property(wid) returned error %s", mpv_error_string(result));
 
     env->DeleteGlobalRef(mpv_instance->surface);
     mpv_instance->surface = nullptr;
